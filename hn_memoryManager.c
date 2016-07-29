@@ -13,7 +13,7 @@ void  RecordMalloc(int size,char *caller){
 void  RecordFree(int size,char *caller){
 
 	freeMemory+=size;
-	printw("free: %5d  %5db   %s\n",freeMemory,size,caller);
+	//printw("free: %5d  %5db   %s\n",freeMemory,size,caller);
 }
 
 

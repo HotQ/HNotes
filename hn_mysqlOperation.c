@@ -31,7 +31,7 @@ void ShowQueryResult_Select(MYSQL *conn_ptr,char * query){
     int res, i, j,fNum;
     unsigned long rNum;	
 
-    char ***res_select,tempStr[30];
+    char ***res_select,tempStr[300];
     int **width_scr,
         **width_chr,
         strlenSqlrowJ;

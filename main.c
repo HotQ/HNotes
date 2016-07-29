@@ -66,71 +66,17 @@ int main(){
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 	init_pair(3, COLOR_BLACK, COLOR_WHITE);
 
-
-
-/*
-
-	//char a[100];int i=0;
-	char a1;int a2;
-	while(a1!=10){
-		a1 = getch();
-		printw("\r%c   %d\n",a1,a1);
-		
-	}
-
-	//db_login(conn_ptr);
-	MemoryReport();
-
-*/
-
-
-
-	int aa=1,*a;char bb='c',*b=NULL;double cc=0.1,*c=&cc;
-
-	char ch=getch();
-
-	printw("\n********************************************************\n");
-
-	character ch1,ch2;
-	ch1.type = 1;
-	ch2.type = 2;
-
-
-	DuLinkList L,L1;
-	//InitList(&L);
-	//ListInsertTail(L,CreateCharacter(getch()));
-	//ListInsertTail(L,CreateCharacter(getch()));
-	PrintwCharacter(CreateCharacter(getch()));
-	PrintwCharacter(CreateCharacter(getch()));
-	//printw("\n%d      %d      0x%x\n",sizeof(ch1),   ListLength(L)   ,(unsigned int)(long)&ch1);
-
-
-/*
-    ListInsert(&L,1,9);
-    PrintDLList(L);printf("\n");
-
-    ListSplit(&L,-3);
-    PrintDLList(L);printf("\n");
-    PrintDLList(L1);printf("\n");
-*/
-
-
-
-
-
-
-
-
-
+	db_login(conn_ptr);
 
 
 
 	MemoryReport();
 
-	while(getch()!='e'){}
-	printw("Quit!\n");
-	printw("\n********************************************************\n");
-	
+	printw("press 'e' if you wanna quit: ");
+	noecho();
+	while(getch()!='e');
+	echo();
+
 	refresh();
 
 	endwin();
