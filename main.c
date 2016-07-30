@@ -1,6 +1,6 @@
 #include "hn_globalDependency.h"
 
-
+void initConfig();
 void PrintDLList(DuLinkList L){
 
     DuLinkList p=L->next;
@@ -51,34 +51,74 @@ void PrintwCharacter(character_p chp){
 }
 
 
-int main(){
+int main(int argc, char **argv){
 	
 	setlocale(LC_ALL,"");
-
-	refresh();
 	MYSQL *conn_ptr;
+	printf("%d\n",argc );
+	if(argc>1){
+		if(strcmp(argv[1],"--help")==0){
+			printf("Usage: gcc [options] file...\n");
+			printf("Options:\n");
+			printf("     --help                   Display this information\n");
+			printf("     --version                Display version information\n");
+			printf(" -p, --pwdmanager             Open hn_pwdManager");
+			return 0;
+		}else if(strcmp(argv[1],"--pwdmanager")==0 || strcmp(argv[1],"-p")==0){
+			printf("Not done yet:)\n");
+		}else{
+			printf("there's no command like \033[31;5m\"%s\"\033[0m\n",argv[1] );
+		}
+	
+	}else{
+		initscr();
+		void initConfig();
+		db_login(conn_ptr);
+
+		MemoryReport();
+
+		printw("press 'e' if you wanna quit: ");
+		refresh();
+		noecho();
+		while(getch()!='e');
+		endwin();
+		return 0;
+	}
+
+			
+	
 
 
-	initscr();
+/*
+Usage: gcc [options] file...
+Options:
+  -pass-exit-codes         Exit with highest error code from a phase
+  --help                   Display this information
+  --target-help            Display target specific command line options
+  --help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]
+                           Display specific types of command line options
+  (Use '-v --help' to display command line options of sub-processes)
+  --version                Display compiler version information
+  -dumpspecs               Display all of the built in spec strings
+  -dumpversion             Display the version of the compiler
+  -dumpmachine             Display the compiler's target processor
+  -print-search-dirs       Display the directories in the compiler's search path
+  -print-libgcc-file-name  Display the name of the compiler's companion library
+  -print-file-name=<lib>   Display the full path to library <lib>
+  -print-prog-name=<prog>  Display the full path to compiler component <prog>
+  -print-multiarch         Display the target's normalized GNU triplet, used as
+                           a component in the library path
+
+*/
+
+
+}
+
+
+void initConfig(){
 	start_color();
 	init_color(COLOR_BLACK, 0, 0, 0);
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 	init_pair(3, COLOR_BLACK, COLOR_WHITE);
-
-	db_login(conn_ptr);
-
-
-
-	MemoryReport();
-
-	printw("press 'e' if you wanna quit: ");
-	noecho();
-	while(getch()!='e');
-	echo();
-
-	refresh();
-
-	endwin();
-	return 0;
 }
