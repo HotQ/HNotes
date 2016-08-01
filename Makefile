@@ -1,5 +1,5 @@
 target = HNotes
-object = main.o hn_dbLogin.o hn_mysqlOperation.o hn_memoryManager.o hn_duLinkList.o
+object = main.o hn_dbLogin.o hn_mysqlOperation.o hn_memoryManager.o hn_duLinkList.o hn_editor.o
 mysql  = -lmysqlclient   -L /usr/lib/mysql   -I /usr/include/mysql 
 dependency = $(mysql) -lncursesw -L /usr/lib
 
@@ -20,6 +20,9 @@ hn_memoryManager.o:hn_memoryManager.c hn_memoryManager.h
 
 hn_duLinkList.o:hn_duLinkList.c hn_duLinkList.h
 	gcc -c hn_duLinkList.c -o hn_duLinkList.o  $(dependency) 
+
+hn_editor.o:hn_editor.c hn_globalDependency.h 
+	gcc -c hn_editor.c -o hn_editor.o  $(dependency) 
 
 
 clean:
