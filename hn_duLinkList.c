@@ -1,5 +1,7 @@
-#include "hn_globalDependency.h"
+#include <stdlib.h>
 
+#include "hn_duLinkList.h"
+#include "hn_memoryManager.h"
 
 // 初始化双向链表
 void InitList(DuLinkList *L){
@@ -8,6 +10,13 @@ void InitList(DuLinkList *L){
     (*L)->next=(*L)->prior=(*L);
 }
 
+void PrintList(DuLinkList L,void (*PrintNode)(void *)){
+    DuLinkList p=L->next;
+    while(p!=L){
+        PrintNode(p->data);
+        p=p->next;
+    }
+}
 
 // 返回双向链表的长度
 int ListLength(DuLinkList L){

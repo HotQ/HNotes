@@ -1,4 +1,21 @@
-#include "hn_globalDependency.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+
+#include "ncurses.h"
+#include "mysql.h"
+
+#include "hn_editor.h"
+#include "hn_dbLogin.h"
+#include "hn_memoryManager.h"
+
+#define  initConfig()\
+	start_color();\
+	init_color(COLOR_BLACK, 0, 0, 0);\
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);\
+	init_pair(2, COLOR_RED, COLOR_BLACK);\
+	init_pair(3, COLOR_BLACK, COLOR_WHITE);
 
 int main(int argc, char **argv){
 	
@@ -23,14 +40,11 @@ int main(int argc, char **argv){
 		initscr();
 		initConfig();
 
-
-
 		char *arrChoice[5]={"HNotes","PasswordManager","Debug","Quit"};int choice;
 		keypad(stdscr, TRUE);
-		//printw("rrrrrr:  %d \n", SelectString("show:   ",a,5));	refresh();
 
 		do{
-			choice = SelectString("s>>>>> ",arrChoice,4);
+			choice = SelectString(">>>>> ",arrChoice,4);
 			switch(choice){
 				case 1:;
 				case 2:
@@ -43,19 +57,10 @@ int main(int argc, char **argv){
 					break;
 			}
 		}while(choice!=4);
+		
 		MemoryReport();
-
-		//keypad(stdscr, FALSE);
-
-
-		// printw("press 'e' if you wanna quit: ");
-		// refresh();
-		// noecho();
-		// while(getch()!='e');
 		endwin();
 		return 0;
 	}
 
 }
-
-

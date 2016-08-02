@@ -1,17 +1,13 @@
-#include "hn_globalDependency.h"
+#include "ncurses.h"
 
-//extern int mallocTimes;
-
+#include "hn_memoryManager.h"
 
 void  RecordMalloc(int size,char *caller){
-
 	mallocMemory+=size;
-
 	//printw("malloc: %5d  %5db   %s\n",mallocMemory,size,caller);refresh();
 }
 
 void  RecordFree(int size,char *caller){
-
 	freeMemory+=size;
 	//printw("free: %5d  %5db   %s\n",freeMemory,size,caller);
 }
@@ -24,5 +20,4 @@ void MemoryReport(){
 	printw(">   free memory:%7d |\n",freeMemory );
 	printw("*************************\n");
 	refresh();
-
 }

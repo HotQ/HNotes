@@ -1,4 +1,8 @@
-#include "hn_globalDependency.h"
+#include "ncurses.h"
+#include "mysql.h"
+
+#include "hn_dbLogin.h"
+#include "hn_mysqlOperation.h"
 
 
 Status db_login(MYSQL *conn_ptr){

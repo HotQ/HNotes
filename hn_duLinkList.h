@@ -7,21 +7,9 @@ typedef struct DuLNode{
     struct DuLNode *next;
 }DuLNode,*DuLinkList;
 
-
-
-typedef struct  character{
-    int type;   // 1 @#$aqwe123
-                // 2 “‘’”
-                // 3 《》，。汉语
-    char en;
-    char zh[5];
-    char zh_ps[5];
-
-
-}character,*character_p;
-
-
 void InitList(DuLinkList *);
+void PrintList(DuLinkList L,void (*PrintNode)(void *));
+
 int ListLength(DuLinkList );
 
 void ClearList(DuLinkList *);
@@ -35,6 +23,4 @@ void ListInsert(DuLinkList ,int ,int );
 
 DuLinkList ListSplit(DuLinkList ,int);
 
-
-
-#endif // DULINKLIST_H_INCLUDED
+#endif // HN_DULINKLIST_H_INCLUDED

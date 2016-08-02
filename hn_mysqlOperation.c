@@ -1,7 +1,10 @@
-#include "hn_globalDependency.h"
+#include <string.h>
 
+#include "ncurses.h"
+#include "mysql.h"
 
-
+#include "hn_mysqlOperation.h"
+#include "hn_memoryManager.h"
 
 int width_scrs(char *src,int size){
     int i=0,width_scr=0;

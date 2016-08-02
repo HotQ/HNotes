@@ -1,13 +1,9 @@
-#include "hn_globalDependency.h"
+#include <stdlib.h>
 
-void PrintDLList(DuLinkList L,void (*PrintNode)(void *e)){
+#include "ncurses.h"
 
-    DuLinkList p=L->next;
-    while(p!=L){
-        PrintNode(p->data);
-        p=p->next;
-    }
-}
+#include "hn_editor.h"
+#include "hn_memoryManager.h"
 
 character_p CreateCharacter(char ch1){
 	if(ch1==27)return NULL;
