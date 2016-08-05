@@ -83,7 +83,7 @@ Status db_login(MYSQL *conn_ptr){
 	refresh();
 	//ShowQueryResult_Select(conn_ptr,"show databases;");
     mysql_query(conn_ptr,"use HNotes;"); 
-    ShowQueryResult_Select(conn_ptr,"select * from demo1;");
+    ShowQueryResult_Select(stdscr,conn_ptr,"select * from demo1;");
 
 
 

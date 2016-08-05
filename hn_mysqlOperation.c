@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 
 #include "ncurses.h"
 #include "mysql.h"
@@ -24,7 +25,7 @@ int width_scrs(char *src,int size){
 }
 
 
-void ShowQueryResult_Select(MYSQL *conn_ptr,char * query){
+void ShowQueryResult_Select(WINDOW  *win,MYSQL *conn_ptr,char * query){
     MYSQL_RES   *res_ptr;
     MYSQL_ROW    sqlrow;
     MYSQL_FIELD *sqlfield;
@@ -43,7 +44,7 @@ void ShowQueryResult_Select(MYSQL *conn_ptr,char * query){
     if (conn_ptr) {
         res = mysql_query(conn_ptr, query);//select * from db"); //
         if (res) {
-            printw("SELECT error:%s\n",mysql_error(conn_ptr));
+            wprintw(win,"SELECT error:%s\n",mysql_error(conn_ptr));
         } else {
             res_ptr = mysql_store_result(conn_ptr);             //
             if(res_ptr) {
@@ -51,7 +52,7 @@ void ShowQueryResult_Select(MYSQL *conn_ptr,char * query){
                 fNum = mysql_num_fields(res_ptr);
                 
 
-                printw("\n\n******************\n%lu Rows   %d Field\n******************\n\n",rNum,fNum);
+                wprintw(win,"\n\n******************\n%lu Rows   %d Field\n******************\n\n",rNum,fNum);
 
                 field_max_length =  (int *)malloc(sizeof(int)*fNum);RecordMalloc(sizeof(int)*fNum,"ShowQueryResult_Select  field_max_length");
                 res_select =        (char***)malloc(sizeof(char**)*rNum);RecordMalloc(sizeof(char**)*rNum,"ShowQueryResult_Select  res_select");
@@ -85,40 +86,40 @@ void ShowQueryResult_Select(MYSQL *conn_ptr,char * query){
                 }
 
 
-                printw("+");
+                wprintw(win,"+");
                 for(i=0;i<fNum;i++){
                     for(j=0;j<field_max_length[i]+2;j++){
-                        printw("-");
+                        wprintw(win,"-");
                     }
-                    printw("+");
+                    wprintw(win,"+");
                 }
-                printw("\n");
+                wprintw(win,"\n");
 
                 int temp;
                 for(i=0;i<rNum;i++){
-                    printw("| ");
+                    wprintw(win,"| ");
                     for(j=0;j<fNum;j++){
                         temp = field_max_length[j]- width_scr[i][j];
-                        printw("%s%*s| ",res_select[i][j],temp+1," ");
+                        wprintw(win,"%s%*s| ",res_select[i][j],temp+1," ");
                         sprintf(tempStr,"ShowQueryResult_Select  res_select[%d][%d]",i,j);RecordFree(sizeof(char)*(strlen(res_select[i][j])+1),tempStr);
                         free(res_select[i][j]);
                     }
-                    printw("\n");
+                    wprintw(win,"\n");
 
                     free(res_select[i]);    sprintf(tempStr,"ShowQueryResult_Select  res_select[%d]",i);RecordFree(sizeof(char*)*fNum,tempStr);
                     free(width_scr[i]);     sprintf(tempStr,"ShowQueryResult_Select  width_scr[%d]",i);RecordFree(sizeof(int)*fNum,tempStr);
 
                 }
                 
-                printw("+");
+                wprintw(win,"+");
                 for(i=0;i<fNum;i++){
                     for(j=0;j<field_max_length[i]+2;j++){
-                        printw("-");
+                        wprintw(win,"-");
                     }
-                    printw("+");
+                    wprintw(win,"+");
                     
                 }
-                printw("\n");
+                wprintw(win,"\n");
 
                 free(field_max_length); RecordFree(sizeof(int)*fNum,"ShowQueryResult_Select  field_max_length");
                 free(res_select);RecordFree(sizeof(char**)*rNum,"ShowQueryResult_Select  res_select");
