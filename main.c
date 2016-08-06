@@ -63,7 +63,6 @@ int main(int argc, char **argv){
 		scrollok(stdscr,TRUE);
 		initConcole();
 
-		usleep(100);
 		do{
 			choice = SelectString(">>>>> ",arrChoice,4);
 			switch(choice){
@@ -101,8 +100,10 @@ void ShowHelp(){
 
 void initConcole(){
 	int height,width;
-
 	getmaxyx(stdscr, height, width);
+	current_std_h = height;
+	current_std_w = width;
+
 	winBColumn = newwin( 0, width , height-1, 1 );
 	wrefresh(winBColumn);
 
