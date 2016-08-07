@@ -37,55 +37,56 @@ character_p CreateCharacter(char ch1){
 	return e;
 }
 
-void PrintwCharacter(character_p chp){
-	if(chp->type==1)printw("%c",chp->en);
-	if(chp->type==2)printw("%s",chp->zh);
-	if(chp->type==3)printw("%s",chp->zh_ps);
+void PrintwCharacter(WINDOW  *win,character_p chp){
+	if(chp->type==1)wprintw(win,"%c",chp->en);
+	if(chp->type==2)wprintw(win,"%s",chp->zh);
+	if(chp->type==3)wprintw(win,"%s",chp->zh_ps);
 }
 
-int SelectString(char* info,char *proposal[],int size){
+int SelectString(WINDOW  *win,char* info,char *proposal[],int size){
 	int pos=1,ch;
-	_Marquee(info,proposal,pos,size);refresh();
+	_Marquee(win,info,proposal,pos,size);
+	wrefresh(win);
 	while(1){
-		ch=getch();
+		ch=wgetch(win);
 		switch(ch){
 			case KEY_LEFT :
 
 				if(pos==1)pos=size;
 				else pos--;
 
-				printw("\r"); 
-				_Marquee(info,proposal,pos,size);
+				wprintw(win,"\r"); 
+				_Marquee(win,info,proposal,pos,size);
 				break; 
 			case KEY_RIGHT:
 
 				if(pos==size)pos=1;
 				else pos++;
-				printw("\r");
-				_Marquee(info,proposal,pos,size);
+				wprintw(win,"\r");
+				_Marquee(win,info,proposal,pos,size);
 				break;
 			case 10:
-				_Marquee(info,proposal,pos,size);
-				printw("\n");
+				_Marquee(win,info,proposal,pos,size);
+				wprintw(win,"\n");
 				return pos;
 				break;
 		}
 	}
 }
 
-void _Marquee(char *info,char *proposal[],int pos,int size){
+void _Marquee(WINDOW  *win,char *info,char *proposal[],int pos,int size){
 	int i;
-	printw("%s",info);
+	wprintw(win,"%s",info);
 	for(i=0;i<size;i++){
 		if((i+1)==pos){ 
 			/*init_pair(3, COLOR_BLACK, COLOR_WHITE)*/           	
-            attron(COLOR_PAIR(3));
-            printw(" %s ",proposal[i]);
-			attroff(COLOR_PAIR(3));
+            wattron(win,COLOR_PAIR(3));
+            wprintw(win," %s ",proposal[i]);
+			wattroff(win,COLOR_PAIR(3));
 		}else{
-			printw(" %s ",proposal[i]);
+			wprintw(win," %s ",proposal[i]);
 		}
 	}
-	refresh();
+	wrefresh(win);
 
 }

@@ -11,8 +11,8 @@ typedef struct  character{
 }character,*character_p;
 
 character_p CreateCharacter(char ch1);
-void PrintwCharacter(character_p chp);
-int SelectString(char* info,char *proposal[],int size);
-void _Marquee(char *info,char *proposal[],int pos,int size);
+void PrintwCharacter(WINDOW  *win,character_p chp);
+int SelectString(WINDOW  *win,char* info,char *proposal[],int size);
+void _Marquee(WINDOW  *win,char *info,char *proposal[],int pos,int size);
 
 #endif // HN_EDITOR_H_INCLUDED

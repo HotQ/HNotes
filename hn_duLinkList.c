@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#include "ncurses.h"
+
 #include "hn_duLinkList.h"
 #include "hn_memoryManager.h"
 

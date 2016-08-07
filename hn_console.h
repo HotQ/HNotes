@@ -1,3 +1,6 @@
+#ifndef HN_CONCOLE_H_INCLUDED
+#define HN_CONCOLE_H_INCLUDED
+
 void* initMonitor(void *arg);
 
 WINDOW *currentWin;
@@ -8,7 +11,7 @@ extern WINDOW	*winEntry,
 		        *winHnote,
 		        *winPawmanager,
 		        *winConsole ,
-		        *winBColumn;
-
-
-
+		        *winBColumn,
+		        *winTemp;
+		        
+#endif // HN_CONCOLE_H_INCLUDED

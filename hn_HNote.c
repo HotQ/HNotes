@@ -4,5 +4,4 @@
 void entryHNote(){
 	printw("Not done yet:)\n");
 	refresh();
-
 }

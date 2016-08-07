@@ -1,1 +1,6 @@
+#ifndef HN_PASSWORDMANAGER_H_INCLUDED
+#define HN_PASSWORDMANAGER_H_INCLUDED
+
 void entryPasswordManager();
+
+#endif // # HN_PASSWORDMANAGER_H_INCLUDED

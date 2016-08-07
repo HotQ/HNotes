@@ -4,7 +4,7 @@
 
 void  RecordMalloc(int size,char *caller){
 	mallocMemory+=size;
-	//printw("malloc: %5d  %5db   %s\n",mallocMemory,size,caller);refresh();
+	//wprintw("malloc: %5d  %5db   %s\n",mallocMemory,size,caller);refresh();
 }
 
 void  RecordFree(int size,char *caller){
@@ -13,11 +13,11 @@ void  RecordFree(int size,char *caller){
 }
 
 
-void MemoryReport(){
-	printw("\n\nMemoryReport\n");
-	printw("*************************\n");
-	printw("> malloc memory:%7d |\n",mallocMemory );
-	printw(">   free memory:%7d |\n",freeMemory );
-	printw("*************************\n");
-	refresh();
+void MemoryReport(WINDOW  *win){
+	wprintw(win,"\n\nMemoryReport\n");
+	wprintw(win,"*************************\n");
+	wprintw(win,"> malloc memory:%7d |\n",mallocMemory );
+	wprintw(win,">   free memory:%7d |\n",freeMemory );
+	wprintw(win,"*************************\n");
+	wrefresh(win);
 }

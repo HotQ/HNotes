@@ -19,7 +19,6 @@
 #include "hn_PasswordManager.h"
 #include "hn_console.h"
 
-
 #define  initConfig()\
 	start_color();\
 	init_color(COLOR_BLACK, 0, 0, 0);\
@@ -32,11 +31,11 @@ WINDOW	*winEntry      =NULL,
         *winHnote      =NULL,
         *winPawmanager =NULL,
         *winConsole    =NULL,
-        *winBColumn    =NULL;
+        *winBColumn    =NULL,
+        *winTemp       =NULL;
 
 void ShowHelp();
-void initConcole();
-
+void initWindows();
 
 int main(int argc, char **argv){
 	
@@ -59,18 +58,20 @@ int main(int argc, char **argv){
 		initConfig();
 
 		char *arrChoice[5]={"HNotes","PasswordManager","test","Quit"};int choice;
-		keypad(stdscr, TRUE);
-		scrollok(stdscr,TRUE);
-		initConcole();
+
+		initWindows();
+
 
 		do{
-			choice = SelectString(">>>>> ",arrChoice,4);
+			choice = SelectString(winEntry,">>>>> ",arrChoice,4);
 			switch(choice){
 				case 1:
-					entryHNote();
+					wprintw(winEntry,"Not done yet:)\n");
+
 					break;
 				case 2:
-					entryPasswordManager();
+					wprintw(winEntry,"Not done yet:)\n");
+
 					break;
 				case 3:
 					db_login(conn_ptr);
@@ -80,8 +81,9 @@ int main(int argc, char **argv){
 			}
 		}while(choice!=4);
 		
-		MemoryReport();
-		refresh();
+		MemoryReport(winEntry);
+
+		wrefresh(winEntry);
 
 		getchar();
 		endwin();
@@ -98,14 +100,21 @@ void ShowHelp(){
 	printf(" -p, --pwdmanager             Open hn_pwdManager");
 }
 
-void initConcole(){
+void initWindows(){
 	int height,width;
 	getmaxyx(stdscr, height, width);
 	current_std_h = height;
 	current_std_w = width;
 
-	winBColumn = newwin( 0, width , height-1, 1 );
+	winBColumn = newwin( 1, width , height-1, 0 );
 	wrefresh(winBColumn);
+
+	winEntry = newwin( height-1, width , 0, 0 );
+	keypad(winEntry, TRUE);
+	scrollok(winEntry,TRUE);
+	touchwin(winEntry);
+
+	wrefresh(winEntry);
 
     pthread_t pthd = pthread_create(&pthd, NULL, initMonitor , NULL);
 }
